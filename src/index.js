@@ -3,35 +3,46 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 var ChatApp = React.createClass({
-  
-  getInitialSate: function() {
+
+  getInitialState: function() {
     return {
       messages: [],
       socket: window.io('http://localhost:5000')
     }
   },
-  
+
   componentDidMount: function(){
-    this.state.socket.on('new-message', function(msg){
+    var self = this;
+    this.state.socket.on('receive-message', function(msg){
       console.log(msg);
-      this.setState({
-        messages: this.state.messages.push(msg)
+      var messages = self.state.messages;
+        messages.push(msg);
+      self.setState({
+        messages: messages
       })
-      
+      console.log(self.state.messages)
+
     });
-    
+
   },
-  
+
   submitMessage: function(){
     var message = document.getElementById('message').value;
-    this.socket.emit('receive-message', message);
+    this.state.socket.emit('new-message', message);
     console.log(message);
   },
   render() {
+    var i = 0;
+    var messages = this.state.messages.map(function(msg) {
+      return (
+        <li key={i}> {msg} </li>
+      );
+     i++
+    })
     var self = this;
       return (
-          <div> 
-            <ul> 
+          <div>
+            <ul>
             </ul>
             <input id="message" type="text"/>
               <button onClick={self.submitMessage}> send </button>
@@ -42,5 +53,5 @@ var ChatApp = React.createClass({
 
 
 ReactDOM.render(
-  <ChatApp />, 
+  <ChatApp />,
   document.getElementById('root'));
