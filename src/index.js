@@ -45,20 +45,21 @@ var ChatApp = React.createClass({
     var i = 0;
     var messages = this.state.messages.map(function(msg) {
       return (
-        <li> <strong> {msg.user} </strong><span> {msg.body} </span> </li>
+        <li> <strong> {msg.user}: </strong><span> {msg.body} </span> </li>
       );
      i++
    });
     var self = this;
       return (
           <div>
-            <ul>
+            <h2> React Chat App </h2>
+            <ul className="message-box">
               {messages}
             </ul>
-            <input id="message" type="text"/>
+            <input className="input-message" id="message" type="text"/>
               <button onClick={() => self.submitMessage()}> send </button>
               <br/>
-              <input id="user" type="text" placeholder="choose a username"/>
+              <input className="username" id="user" type="text" placeholder="choose a username"/>
               <button onClick={() => self.submitUserName()}> submit </button>
           </div>
       )
