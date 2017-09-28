@@ -10,8 +10,8 @@ h2 {
 }
 
 .message-box {
-  width: 50%;
-  height: 50%;
+  width: 675px;
+  height: 50vh;
   border: 5px solid black;
   margin-left: 20px;
 }
@@ -22,10 +22,18 @@ li {
   list-style-type: none;
 }
 
-input {
+.input-message {
+  width: 585px;
   margin-left: 20px;
   margin-bottom: 20px;
   padding: 10px 30px;
+}
+
+.username {
+  width: 10%;
+  padding: 10px 30px;
+  margin-left: 20px;
+
 }
 
 button {
